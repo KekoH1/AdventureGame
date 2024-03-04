@@ -13,6 +13,7 @@ namespace AdventurGameDemo
             while (true)
             {
                 World.PrintWorld();
+                World.PrintHealthBar(); 
                 World.PlayerMovement();
             }
         }
