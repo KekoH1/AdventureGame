@@ -16,6 +16,7 @@ namespace AdventurGameDemo
                 World.PrintHealthBar(); 
                 World.PlayerMovement();
             }
+
         }
     }
 }

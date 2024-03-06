@@ -182,9 +182,6 @@ namespace AdventureGameDemo
             return null;
         }
 
-        internal void PrintHealthBar()
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }
