@@ -110,9 +110,9 @@ namespace AdventureGameDemo
                 }
             }
         }
-        /*public void GenerateRandomItems(int numberOfItems)
+        
 
-        public void GenerateRandomItems(int numberOfItems)
+        /*public void GenerateRandomItems(int numberOfItems)
 
         {
             Random random = new Random();
@@ -143,13 +143,13 @@ namespace AdventureGameDemo
             
         }*/
 
-                string itemName = "Item" + (i + 1);
+           /*     string itemName = "Item" + (i + 1);
 
                 Item newItem = new Item(randomX, randomY, 'I', itemName);
                 Items.Add(newItem);
                 Grid[randomX, randomY] = newItem.Symbol;
             }
-        }
+        }*/
 
         //Varelser
         public void GenerateRandomVarelsers(int numberOfVarelser)
@@ -232,14 +232,6 @@ namespace AdventureGameDemo
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
-        
-
-        public void PlayerMovement()
-        {
-            ConsoleKeyInfo KeyInfo = Console.ReadKey(true);
-            /*Console.Clear();*/
-
-        }
 
         public void PlayerMovement()
         {
@@ -328,10 +320,10 @@ namespace AdventureGameDemo
 
 
 
-        internal void PrintHealthBar()
+       /* internal void PrintHealthBar()
         {
             throw new NotImplementedException();
-        }
+        }*/
 
     }
 }
