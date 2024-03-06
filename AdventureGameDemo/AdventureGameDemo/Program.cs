@@ -8,6 +8,7 @@ namespace AdventurGameDemo
         public static void Main(string[] args)
         {
             TheWorld World = new TheWorld();
+
             World.GenerateRandomWeapons(2);
             World.GenerateRandomPotions(3);
             World.GenerateRandomVarelsers(3);
@@ -16,6 +17,8 @@ namespace AdventurGameDemo
             while (true)
             {
                 World.PrintWorld();
+                World.PrintHealthBar();
+
                 World.PlayerMovement();
             }
         }

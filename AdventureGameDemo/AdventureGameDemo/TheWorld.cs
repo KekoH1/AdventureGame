@@ -1,104 +1,10 @@
-﻿/*using System;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace Game
-{
-    public class TheWorld
-    {
-        public char[,] Grid;
-        public int PlayerLocationX;
-        public int PlayerLocationY;
-        public int WorldSizeX;
-        public int WorldSizeY;
-        
-        public TheWorld()
-        {
-            WorldSizeX = 25;
-            WorldSizeY = 120;
-
-            Grid = new char[WorldSizeX, WorldSizeY]; // 2d array
-            PlayerLocationX = 2;
-            PlayerLocationY = 2;
-
-            CreateWorld();
-
-            Grid[PlayerLocationX, PlayerLocationY] = 'P';
-        }
-
-        public void CreateWorld()
-        {
-            for (int i = 0; i < WorldSizeX; i++)
-            {
-                for(int j = 0; j < WorldSizeY; j++)
-                {
-                    Grid[i, j] = ' ';
-                }
-            }
-        }
-
-       public void PrintWorld()
-        {
-            Console.Clear();
-
-            string S = "";
-
-            for (int i = 0; i < WorldSizeX; i++)
-            {
-                for (int j = 0; j < WorldSizeY; j++)
-                {
-                   S += (Grid[i,j]);
-                }
-                
-                S += "\n";
-            }     
-            
-            Console.WriteLine(S);
-
-        }
-
-               
-        public void PlayerMovement()
-        {
-            
-
-            ConsoleKeyInfo KeyInfo = Console.ReadKey(true);
-            Console.Clear();
-
-            switch (KeyInfo.Key)
-            {
-                case ConsoleKey.RightArrow:
-                    Grid[PlayerLocationX, PlayerLocationY + 1] = 'P';
-                    Grid[PlayerLocationX, PlayerLocationY] = ' ';
-                    PlayerLocationY++;
-                    break;
-
-                case ConsoleKey.LeftArrow:
-                    Grid[PlayerLocationX, PlayerLocationY -1] = 'P';
-                    Grid[PlayerLocationX, PlayerLocationY] = ' ';
-                    PlayerLocationY--;
-                    break;
-
-                case ConsoleKey.UpArrow:
-                    Grid[PlayerLocationX-1, PlayerLocationY ] = 'P';
-                    Grid[PlayerLocationX, PlayerLocationY] = ' ';
-                    PlayerLocationX--;
-                    break;
-
-                case ConsoleKey.DownArrow:
-                    Grid[PlayerLocationX+1, PlayerLocationY] = 'P';
-                    Grid[PlayerLocationX, PlayerLocationY] = ' ';
-                    PlayerLocationX++;
-                    break;
-
-            }   
-        }
-    }
-}
-*/
 
 using System;
 
@@ -112,7 +18,9 @@ namespace AdventureGameDemo
         public int WorldSizeX;
         public int WorldSizeY;
         public List<Item> Items;
+
         public Inventory PlayerInventory;
+
         public List<Varelse> Varelser;
 
         public TheWorld()
@@ -151,6 +59,7 @@ namespace AdventureGameDemo
             }
         }
         //Items
+
         // separerade items till vapen och potions så de blir enklare 
         public void GenerateRandomWeapons(int numberOfWeapons)
         {
@@ -202,6 +111,9 @@ namespace AdventureGameDemo
             }
         }
         /*public void GenerateRandomItems(int numberOfItems)
+
+        public void GenerateRandomItems(int numberOfItems)
+
         {
             Random random = new Random();
 
@@ -209,6 +121,7 @@ namespace AdventureGameDemo
             {
                 int randomX = random.Next(1, WorldSizeX - 1);
                 int randomY = random.Next(1, WorldSizeY - 1);
+
                 
                 Type itemType = random.Next(2) == 0 ? typeof(Weapon) : typeof(Potion);
 
@@ -229,6 +142,15 @@ namespace AdventureGameDemo
             }
             
         }*/
+
+                string itemName = "Item" + (i + 1);
+
+                Item newItem = new Item(randomX, randomY, 'I', itemName);
+                Items.Add(newItem);
+                Grid[randomX, randomY] = newItem.Symbol;
+            }
+        }
+
         //Varelser
         public void GenerateRandomVarelsers(int numberOfVarelser)
         {
@@ -280,6 +202,7 @@ namespace AdventureGameDemo
                 Console.WriteLine();
             }
 
+
             int itemsAndInventoryX = WorldSizeY + 2;
             int itemsAndInventoryY = 0;
 
@@ -315,6 +238,14 @@ namespace AdventureGameDemo
         {
             ConsoleKeyInfo KeyInfo = Console.ReadKey(true);
             /*Console.Clear();*/
+
+        }
+
+        public void PlayerMovement()
+        {
+            ConsoleKeyInfo KeyInfo = Console.ReadKey(true);
+            Console.Clear();
+
 
             int newPlayerLocationX = PlayerLocationX;
             int newPlayerLocationY = PlayerLocationY;
@@ -355,6 +286,7 @@ namespace AdventureGameDemo
                 }
             }
 
+
             for (int i = 0; i < Items.Count; i++)
             {
                 Item item = Items[i];   
@@ -369,6 +301,17 @@ namespace AdventureGameDemo
             }
 
             PrintWorld();
+
+            foreach (Item item in Items)
+            {
+                if (PlayerLocationX == item.X && PlayerLocationY == item.Y)
+                {
+                    /*Console.WriteLine($"Player picked up {item.Name}");*/ // skapa en inventory klass som skriver ut vilka items man har
+                    Items.Remove(item);
+                    break;
+                }
+            }
+
         }
 
         public Varelse GetVarelseAtPosition(int x, int y)
@@ -382,5 +325,13 @@ namespace AdventureGameDemo
             }
             return null;
         }
+
+
+
+        internal void PrintHealthBar()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
