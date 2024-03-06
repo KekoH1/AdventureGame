@@ -8,12 +8,17 @@ namespace AdventurGameDemo
         public static void Main(string[] args)
         {
             TheWorld World = new TheWorld();
-            World.GenerateRandomItems(4);
+
+            World.GenerateRandomWeapons(2);
+            World.GenerateRandomPotions(3);
             World.GenerateRandomVarelsers(3);
+
+
             while (true)
             {
                 World.PrintWorld();
-                World.PrintHealthBar(); 
+                World.PrintHealthBar();
+
                 World.PlayerMovement();
             }
         }
