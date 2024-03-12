@@ -1,0 +1,5 @@
+C:\Users\Firas Abbas\Desktop\prog\AdventureGame\AdventureGameDemo\AdventureGameDemo\obj\Debug\net8.0\AdventureGameDemo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Firas Abbas\Desktop\prog\AdventureGame\AdventureGameDemo\AdventureGameDemo\obj\Debug\net8.0\AdventureGameDemo.AssemblyInfoInputs.cache
+C:\Users\Firas Abbas\Desktop\prog\AdventureGame\AdventureGameDemo\AdventureGameDemo\obj\Debug\net8.0\AdventureGameDemo.AssemblyInfo.cs
+C:\Users\Firas Abbas\Desktop\prog\AdventureGame\AdventureGameDemo\AdventureGameDemo\obj\Debug\net8.0\AdventureGameDemo.csproj.CoreCompileInputs.cache
+C:\Users\Firas Abbas\Desktop\prog\AdventureGame\AdventureGameDemo\AdventureGameDemo\obj\Debug\net8.0\AdventureGameDemo.sourcelink.json
