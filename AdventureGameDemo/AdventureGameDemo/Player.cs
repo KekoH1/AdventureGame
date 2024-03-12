@@ -1,44 +1,59 @@
-using System;
-
-namespace AdventureGameDemo
+public class Player
 {
-    public class Player
+    private int health;
+    private int maxHealth;
+    private int v;
+
+    public Player()
     {
-        private int health;
-        private int maxHealth;
+        maxHealth = 100;
+        health = maxHealth;
+    }
 
-        public Player(int maxHealth)
+    public Player(int v)
+    {
+        this.v = v;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health < 0)
         {
-            this.maxHealth = maxHealth;
-            this.health = maxHealth;
+            health = 0;
+        }
+    }
+
+    public int GetHealth()
+    {
+        return health;
+    }
+
+    public int GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public void PrintHealthBar()
+    {
+        int healthPercentage = (int)((float)health / maxHealth * 100);
+        string healthBar = "";
+
+        for (int i = 0; i < 10; i++)
+        {
+            if (i < healthPercentage / 10)
+            {
+                healthBar += "#";
+            }
+            else
+            {
+                healthBar += "-";
+            }
         }
 
-        public int Health
-        {
-            get { return health; }
-            set { health = Math.Clamp(value, 0, maxHealth); }
-        }
-
-        public void TakeDamage(int damage)
-        {
-            int previousHealth = Health;
-            Health -= damage;
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"Player took {damage} damage. Current health: {Health}");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"Health bar: {new string('█', Health)}{new string(' ', maxHealth - Health)}");
-            Console.ResetColor();
-        }
-
-        public void Heal(int amount)
-        {
-            int previousHealth = Health;
-            Health += amount;
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"Player healed for {amount} health. Current health: {Health}");
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"Health bar: {new string('█', previousHealth)}{new string(' ', maxHealth - previousHealth)}");
-            Console.ResetColor();
-        }
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine("Health: " + healthBar);
     }
 }

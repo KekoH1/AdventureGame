@@ -320,10 +320,7 @@ namespace AdventureGameDemo
 
 
 
-       /* internal void PrintHealthBar()
-        {
-            throw new NotImplementedException();
-        }*/
+      
 
     }
 }
