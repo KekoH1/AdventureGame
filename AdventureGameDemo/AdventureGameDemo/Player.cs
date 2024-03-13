@@ -1,18 +1,24 @@
+using AdventureGameDemo;
+using System.Numerics;
+
 public class Player
 {
     private int health;
     private int maxHealth;
-    private int v;
+    private object player;
+
+    public int Health { get; set; }
+
+    public Stats Stats { get; set; }
 
     public Player()
     {
         maxHealth = 100;
         health = maxHealth;
-    }
-
-    public Player(int v)
-    {
-        this.v = v;
+        Stats = new Stats();
+        Stats.Strength = 10;
+        Stats.Endurance = 8;
+        Stats.Agility = 6;
     }
 
     public void TakeDamage(int damage)
@@ -56,4 +62,10 @@ public class Player
         Console.WriteLine();
         Console.WriteLine("Health: " + healthBar);
     }
+
+    public bool IsAlive()
+    {
+        return health > 0;
+    }
 }
+

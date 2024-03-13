@@ -7,7 +7,8 @@ namespace AdventurGameDemo
         public static void Main(string[] args)
         {
             TheWorld World = new TheWorld();
-            Player Player = new Player(100);
+            /*Player Player = new Player(100);*/
+            Player Player = new Player();
 
             World.GenerateRandomWeapons(2);
             World.GenerateRandomPotions(3);
