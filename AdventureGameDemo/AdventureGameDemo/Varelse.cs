@@ -68,4 +68,46 @@ namespace AdventureGameDemo
             return Endurance > 0;
         }
     }
+
+
+    namespace AdventureGameDemo
+    {
+        public class Varelse
+        {
+            public Stats Stats { get; set; }
+
+            public Varelse()
+            {
+                Stats = new Stats();
+            }
+        }
+
+        public class Stats
+        {
+            public int Endurance { get; set; }
+            public int Strength { get; set; }
+        }
+    }
 }
+     /*   public void Attack(Player player)
+        {
+        int Strength = 0;
+        // Calculate damage based on Varelse's strength and player's endurance
+        int damage = Strength - player.Endurance;
+
+            // Reduce player's health by the calculated damage
+            player.Health -= damage;
+
+            // Check if the player is still alive
+            if (player.Health <= 0)
+            {
+                Console.WriteLine("Player has been defeated!");
+            }
+            else
+            {
+                Console.WriteLine($"Player has taken {damage} damage. Player's health: {player.Health}");
+            }
+        }
+    }
+
+*/

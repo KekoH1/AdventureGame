@@ -10,6 +10,8 @@ public class Player
     public int Health { get; set; }
 
     public Stats Stats { get; set; }
+    public int Endurance { get; set; }
+    public object Inventory { get; internal set; }
 
     public Player()
     {
@@ -66,6 +68,16 @@ public class Player
     public bool IsAlive()
     {
         return health > 0;
+    }
+
+    internal object GetStats()
+    {
+        throw new NotImplementedException();
+    }
+
+    internal void SetStats(Stats stats)
+    {
+        throw new NotImplementedException();
     }
 }
 

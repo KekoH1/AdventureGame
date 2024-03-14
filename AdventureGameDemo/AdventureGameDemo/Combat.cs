@@ -8,7 +8,7 @@ namespace AdventureGameDemo
 {
     public class Combat
     {
-        public static void PlayerVsVarelser(Player player, List<Varelse> varelser)
+        public static void StartCombat(Player player, List<Varelse> varelser)
         {
             Console.WriteLine("Combat started: Player vs Varelser");
 
@@ -19,62 +19,31 @@ namespace AdventureGameDemo
                 return;
             }
 
-            // Set player stats
-            player.SetStats(new Stats
-            {
-                Strength = 10,
-                Endurance = 8,
-                Agility = 6
-            });
-
-            // Set varelser stats
-            foreach (var varelse in varelser)
-            {
-                varelse.Stats = new Stats
-                {
-                    Strength = 8,
-                    Endurance = 6,
-                    Agility = 4
-                };
-            }
-
             // Start combat
             while (player.IsAlive() && varelser.Any(varelse => varelse.IsAlive()))
             {
                 // Player's turn
                 Console.WriteLine("Player's turn:");
                 Console.WriteLine("Choose an action:");
-                Console.WriteLine("1. Attack 1");
-                Console.WriteLine("2. Attack 2");
-                Console.WriteLine("3. Attack 3");
-                Console.WriteLine("4. Defend");
-                Console.WriteLine("5. Run");
+                Console.WriteLine("1. Attack with fists");
+                Console.WriteLine("2. Attack with weapon");
+                Console.WriteLine("3. Use item to heal");
+                Console.WriteLine("4. Run away");
 
                 int choice = Convert.ToInt32(Console.ReadLine());
 
                 switch (choice)
                 {
                     case 1:
-                        // Player attacks a random varelse
-                        var randomVarelse1 = varelser[new Random().Next(0, varelser.Count)];
-                        Attack1(player, randomVarelse1);
+                        AttackWithFists(player, varelser);
                         break;
                     case 2:
-                        // Player attacks a random varelse
-                        var randomVarelse2 = varelser[new Random().Next(0, varelser.Count)];
-                        Attack2(player, randomVarelse2);
+                        AttackWithWeapon(player, varelser);
                         break;
                     case 3:
-                        // Player attacks a random varelse
-                        var randomVarelse3 = varelser[new Random().Next(0, varelser.Count)];
-                        Attack3(player, randomVarelse3);
+                        UseItemToHeal(player);
                         break;
                     case 4:
-                        // Player defends
-                        Defend(player);
-                        break;
-                    case 5:
-                        // Player tries to run away
                         if (RunAway(player))
                         {
                             Console.WriteLine("Player successfully ran away.");
@@ -112,19 +81,19 @@ namespace AdventureGameDemo
             }
         }
 
-        private static void Attack1(Varelse varelse, Player player)
+        private static void Attack(Varelse varelse, Player player)
         {
-            Console.WriteLine("Varelse attacks Player with Attack 1!");
+            Console.WriteLine("Varelse attacks Player!");
 
             // Calculate damage
-            int damage = varelse.Stats.Strength - player.GetStats().Endurance;
+            int damage = varelse.Stats.Strength - player.Stats.Endurance;
             if (damage < 0)
             {
                 damage = 0;
             }
 
             // Apply damage to player
-            player.GetStats().Endurance -= damage;
+            player.Stats.Endurance -= damage;
 
             Console.WriteLine("Player takes " + damage + " damage.");
 
@@ -135,58 +104,15 @@ namespace AdventureGameDemo
             }
         }
 
-        private static void Attack2(Varelse varelse, Player player)
+        private static void AttackWithFists(Player player, List<Varelse> varelser)
         {
-            Console.WriteLine("Varelse attacks Player with Attack 2!");
+            Console.WriteLine("Player attacks with fists!");
+
+            // Player attacks a random varelse
+            var randomVarelse = varelser[new Random().Next(0, varelser.Count)];
 
             // Calculate damage
-            int damage = varelse.Stats.Strength - player.GetStats().Endurance;
-            if (damage < 0)
-            {
-                damage = 0;
-            }
-
-            // Apply damage to player
-            player.GetStats().Endurance -= damage;
-
-            Console.WriteLine("Player takes " + damage + " damage.");
-
-            // Check if player is still alive
-            if (!player.IsAlive())
-            {
-                Console.WriteLine("Player is defeated!");
-            }
-        }
-
-        private static void Attack3(Varelse varelse, Player player)
-        {
-            Console.WriteLine("Varelse attacks Player with Attack 3!");
-
-            // Calculate damage
-            int damage = varelse.Stats.Strength - player.GetStats().Endurance;
-            if (damage < 0)
-            {
-                damage = 0;
-            }
-
-            // Apply damage to player
-            player.GetStats().Endurance -= damage;
-
-            Console.WriteLine("Player takes " + damage + " damage.");
-
-            // Check if player is still alive
-            if (!player.IsAlive())
-            {
-                Console.WriteLine("Player is defeated!");
-            }
-        }
-
-        private static void Attack(Player player, Varelse randomVarelse)
-        {
-            Console.WriteLine("Player attacks Varelse!");
-
-            // Calculate damage
-            int damage = player.GetStats().Strength - randomVarelse.Stats.Endurance;
+            int damage = player.Stats.Strength - randomVarelse.Stats.Endurance;
             if (damage < 0)
             {
                 damage = 0;
@@ -204,14 +130,54 @@ namespace AdventureGameDemo
             }
         }
 
-        private static void Defend(Player player)
+        private static void AttackWithWeapon(Player player, List<Varelse> varelser)
         {
-            Console.WriteLine("Player defends!");
+            if (player.Inventory.Contains("Weapon"))
+            {
+                Console.WriteLine("Player attacks with weapon!");
 
-            // Increase player's endurance temporarily
-            player.GetStats().Endurance += 5;
+                // Player attacks a random varelse
+                var randomVarelse = varelser[new Random().Next(0, varelser.Count)];
 
-            Console.WriteLine("Player's endurance increased by 5.");
+                // Calculate damage
+                int damage = player.Stats.Strength + 5 - randomVarelse.Stats.Endurance;
+                if (damage < 0)
+                {
+                    damage = 0;
+                }
+
+                // Apply damage to varelse
+                randomVarelse.Stats.Endurance -= damage;
+
+                Console.WriteLine("Varelse takes " + damage + " damage.");
+
+                // Check if varelse is still alive
+                if (!randomVarelse.IsAlive())
+                {
+                    Console.WriteLine("Varelse is defeated!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Player does not have a weapon in the inventory.");
+            }
+        }
+
+        private static void UseItemToHeal(Player player)
+        {
+            if (player.Inventory.Contains("Healing Item"))
+            {
+                Console.WriteLine("Player uses item to heal!");
+
+                // Increase player's endurance temporarily
+                player.Stats.Endurance += 10;
+
+                Console.WriteLine("Player's endurance increased by 10.");
+            }
+            else
+            {
+                Console.WriteLine("Player does not have a healing item in the inventory.");
+            }
         }
 
         private static bool RunAway(Player player)
@@ -222,7 +188,7 @@ namespace AdventureGameDemo
             int randomNumber = new Random().Next(1, 11);
 
             // Check if player successfully runs away
-            if (randomNumber <= player.GetStats().Agility)
+            if (randomNumber <= player.Stats.Agility)
             {
                 return true;
             }
@@ -232,5 +198,4 @@ namespace AdventureGameDemo
             }
         }
     }
-}
-*/
+}*/
