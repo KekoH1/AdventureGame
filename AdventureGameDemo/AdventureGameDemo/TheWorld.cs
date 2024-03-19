@@ -86,7 +86,7 @@ namespace AdventureGameDemo
         public void GenerateRandomPotions(int numberOfPotions) 
         {
             Random random = new Random();
-            string[] potionsNames = { "Health Potion", "Mana Potion", "Strenght Potion" };
+            string[] potionsNames = { "Health Potion" };
 
             for (int i = 0; i < numberOfPotions;i++)
             {
@@ -285,6 +285,7 @@ namespace AdventureGameDemo
                 if (PlayerLocationX == item.X && PlayerLocationY == item.Y)
                 {
                     Console.WriteLine($"Player picked up {item.Name}");
+                    Console.ReadLine();
                     PlayerInventory.AddItem(item);
                     Items.Remove(item);
                     PlayerInventory.PrintInventory();
