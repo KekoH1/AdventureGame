@@ -15,6 +15,10 @@ public class Player
 
     public Player()
     {
+
+        private int health;
+        public int MaxHealth;
+
         maxHealth = 100;
         health = maxHealth;
         Stats = new Stats();
@@ -23,14 +27,38 @@ public class Player
         Stats.Agility = 6;
     }
 
+
     public void TakeDamage(int damage)
     {
         health -= damage;
         if (health < 0)
-        {
+      {
+ 
+            this.MaxHealth = maxHealth;
+            this.health = maxHealth;
+
             health = 0;
+
         }
     }
+
+
+        public int Health
+        {
+            get { return health; }
+            set { health = Math.Clamp(value, 0, MaxHealth); }
+        }
+
+        public void TakeDamage(int damage)
+        {
+            int previousHealth = Health;
+            Health -= damage;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Player took {damage} damage. Current health: {Health}");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Health bar: {new string('█', Health)}{new string(' ', MaxHealth - Health)}");
+            Console.ResetColor();
+        }
 
     public int GetHealth()
     {
@@ -42,6 +70,7 @@ public class Player
         return maxHealth;
     }
 
+
     public void PrintHealthBar()
     {
         int healthPercentage = (int)((float)health / maxHealth * 100);
@@ -49,6 +78,15 @@ public class Player
 
         for (int i = 0; i < 10; i++)
         {
+
+            int previousHealth = Health;
+            Health += amount;
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Player healed for {amount} health. Current health: {Health}");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Health bar: {new string('█', previousHealth)}{new string(' ', MaxHealth - previousHealth)}");
+            Console.ResetColor();
+
             if (i < healthPercentage / 10)
             {
                 healthBar += "#";
@@ -57,6 +95,7 @@ public class Player
             {
                 healthBar += "-";
             }
+ 
         }
 
         Console.WriteLine();
