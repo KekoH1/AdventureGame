@@ -14,6 +14,7 @@ namespace AdventureGameDemo
         public int Endurance { get; set; }
         public int Agility { get; set; }
 
+
         public Varelse(int x, int y, char symbol, string name, int strength, int endurance, int agility) : base(x, y, symbol)
         {
             Name = name;
@@ -67,6 +68,16 @@ namespace AdventureGameDemo
         {
             return Endurance > 0;
         }
+
+        internal void TakeDamage(int playerDamage)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal int GetHealth()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 
@@ -89,25 +100,4 @@ namespace AdventureGameDemo
         }
     }
 }
-     /*   public void Attack(Player player)
-        {
-        int Strength = 0;
-        // Calculate damage based on Varelse's strength and player's endurance
-        int damage = Strength - player.Endurance;
-
-            // Reduce player's health by the calculated damage
-            player.Health -= damage;
-
-            // Check if the player is still alive
-            if (player.Health <= 0)
-            {
-                Console.WriteLine("Player has been defeated!");
-            }
-            else
-            {
-                Console.WriteLine($"Player has taken {damage} damage. Player's health: {player.Health}");
-            }
-        }
-    }
-
-*/
+     
