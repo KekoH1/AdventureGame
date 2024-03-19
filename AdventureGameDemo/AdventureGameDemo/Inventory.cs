@@ -22,6 +22,12 @@ namespace AdventureGameDemo
             items.Add(item);
         }
 
+        public void UseHealthPotion(Player player, Potion healthPotion)
+        {
+            int healthToRestore = (int)(player.MaxHealth * healthPotion.healthRestoredPercentage / 100);
+            player.Heal(healthToRestore);
+        }
+
         public void PrintInventory()
         {
             Console.WriteLine("Inventory:");
