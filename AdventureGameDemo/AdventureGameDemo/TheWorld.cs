@@ -23,6 +23,9 @@ namespace AdventureGameDemo
 
         public List<Varelse> Varelser;
 
+        public Potion item { get; private set; }
+        public Player Player;
+
         public TheWorld()
         {
             WorldSizeX = 10;
@@ -104,52 +107,13 @@ namespace AdventureGameDemo
                 }
                 else
                 {
-                    Potion newPotion = new Potion(randomX, randomY, 'I', potionName, healingPower, 1);
+                    Potion newPotion = new(randomX, randomY, 'I', potionName, healingPower, 1);
                     Items.Add(newPotion);
                     Grid[randomX, randomY] = newPotion.Symbol;
                 }
             }
         }
         
-
-        /*public void GenerateRandomItems(int numberOfItems)
-
-        {
-            Random random = new Random();
-
-            for (int i = 0; i < numberOfItems; i++)
-            {
-                int randomX = random.Next(1, WorldSizeX - 1);
-                int randomY = random.Next(1, WorldSizeY - 1);
-
-                
-                Type itemType = random.Next(2) == 0 ? typeof(Weapon) : typeof(Potion);
-
-                Item newItem = null;
-
-                if (itemType == typeof(Weapon))
-                {
-                newItem = new Weapon(randomX, randomY, "Sword", 10);
-                }
-                else if (itemType == typeof(Potion))
-                {
-                    newItem = new Potion(randomX, randomY, "Health Potion", 20);
-                }
-
-                Items.Add(newItem);
-
-                Grid[randomX, randomY] = newItem.Symbol;
-            }
-            
-        }*/
-
-           /*     string itemName = "Item" + (i + 1);
-
-                Item newItem = new Item(randomX, randomY, 'I', itemName);
-                Items.Add(newItem);
-                Grid[randomX, randomY] = newItem.Symbol;
-            }
-        }*/
 
         //Varelser
         public void GenerateRandomVarelsers(int numberOfVarelser)
@@ -305,6 +269,11 @@ namespace AdventureGameDemo
                 }
             }
 
+            if (item is Potion && ((Potion)item).Name == "Health Potion")
+            {
+                PlayerInventory.UseHealthPotion(Player, (Potion)item);
+            } 
+
         }
 
         public Varelse GetVarelseAtPosition(int x, int y)
@@ -321,10 +290,10 @@ namespace AdventureGameDemo
 
 
 
-       /* internal void PrintHealthBar()
+        internal void PrintHealthBar()
         {
-            throw new NotImplementedException();
-        }*/
+            
+        }
 
     }
 }
