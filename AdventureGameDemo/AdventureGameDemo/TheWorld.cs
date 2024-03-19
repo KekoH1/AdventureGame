@@ -290,10 +290,12 @@ namespace AdventureGameDemo
 
 
 
+
         internal void PrintHealthBar()
         {
             
         }
+
 
     }
 }
