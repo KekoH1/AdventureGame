@@ -229,7 +229,6 @@ namespace AdventureGameDemo
             if (newPlayerLocationX > 0 && newPlayerLocationX < WorldSizeX - 1 &&
                 newPlayerLocationY > 0 && newPlayerLocationY < WorldSizeY - 1)
             {
-                
                 Grid[newPlayerLocationX, newPlayerLocationY] = 'P';
                 Grid[PlayerLocationX, PlayerLocationY] = ' ';
                 PlayerLocationX = newPlayerLocationX;
@@ -238,14 +237,13 @@ namespace AdventureGameDemo
                 Varelse varelseAtPlayerPosition = GetVarelseAtPosition(PlayerLocationX, PlayerLocationY);
                 if (varelseAtPlayerPosition != null)
                 {
-                    /*Console.WriteLine($"Möter {varelseAtPlayerPosition.Name}");*/ // klass för combat
+                    Combat(Player, varelseAtPlayerPosition);
                 }
             }
 
-
             for (int i = 0; i < Items.Count; i++)
             {
-                Item item = Items[i];   
+                Item item = Items[i];
                 if (PlayerLocationX == item.X && PlayerLocationY == item.Y)
                 {
                     Console.WriteLine($"Player picked up {item.Name}");
@@ -272,8 +270,14 @@ namespace AdventureGameDemo
             if (item is Potion && ((Potion)item).Name == "Health Potion")
             {
                 PlayerInventory.UseHealthPotion(Player, (Potion)item);
-            } 
+            }
+        }
 
+        public void Combat(Player player, Varelse varelse)
+        {
+            // Implement your combat logic here
+            Console.WriteLine($"Player and {varelse.Name} are in combat!");
+            // Add your combat code here
         }
 
         public Varelse GetVarelseAtPosition(int x, int y)

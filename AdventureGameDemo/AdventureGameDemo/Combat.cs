@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdventureGameDemo
 {
-    class Combat
+    /*class Combat
     {
         public static void Encounter(Player player, Varelse varelse)
         {
@@ -62,6 +62,6 @@ namespace AdventureGameDemo
         
         
         }
-    }
+    }*/
 
 }
