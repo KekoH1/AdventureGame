@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System;
+using System.Numerics;
 
 namespace AdventureGameDemo
 {
@@ -26,6 +27,9 @@ namespace AdventureGameDemo
         public Potion item { get; private set; }
         public Player Player { get; private set; }
 
+        private int itemIndex;
+
+
         public TheWorld()
         {
             WorldSizeX = 20;
@@ -35,9 +39,12 @@ namespace AdventureGameDemo
             PlayerLocationX = 2;
             PlayerLocationY = 2;
             Items = new List<Item>();
-            PlayerInventory = new Inventory();
+            PlayerInventory = new Inventory(Player);
             Varelser = new List<Varelse>();
-            Player = new Player();
+
+            Player  = new Player();
+            
+
 
             CreateWorld();
 
@@ -269,6 +276,7 @@ namespace AdventureGameDemo
                 }
             }
 
+
             PrintWorld();
 
             foreach (Item item in Items)
@@ -281,8 +289,20 @@ namespace AdventureGameDemo
                 }
             }
 
-            if (item is Potion && ((Potion)item).Name == "Health Potion")
+            if (KeyInfo.KeyChar >= '1' && KeyInfo.KeyChar <= '3')
             {
+
+                int itemIndex = KeyInfo.KeyChar - '1';
+
+                if (itemIndex >= 0 && itemIndex < PlayerInventory.Items.Count)
+                {
+                    if (PlayerInventory.Items[itemIndex] is Potion && ((Potion)PlayerInventory.Items[itemIndex]).Name == "Health Potion")
+                    {
+                        PlayerInventory.UseItem(itemIndex, Player);
+                    }
+                }
+            }
+
                 PlayerInventory.UseHealthPotion(Player, (Potion)item);
             }
         }
@@ -347,6 +367,7 @@ namespace AdventureGameDemo
             varelse.Health -= playerAttackDamage;
 
             Console.WriteLine($"Player deals {playerAttackDamage} damage to {varelse.Name}");
+
         }
 
         private void VarelseAttack(Player player, Varelse varelse, int strength)
