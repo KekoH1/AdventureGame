@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System;
+using System.Numerics;
 
 namespace AdventureGameDemo
 {
@@ -24,7 +25,8 @@ namespace AdventureGameDemo
         public List<Varelse> Varelser;
 
         public Potion item { get; private set; }
-        public Player Player;
+        public Player Player { get; private set; }
+        private int itemIndex;
 
         public TheWorld()
         {
@@ -35,8 +37,10 @@ namespace AdventureGameDemo
             PlayerLocationX = 2;
             PlayerLocationY = 2;
             Items = new List<Item>();
-            PlayerInventory = new Inventory();
+            PlayerInventory = new Inventory(Player);
             Varelser = new List<Varelse>();
+            Player  = new Player();
+            
 
             CreateWorld();
 
@@ -257,6 +261,7 @@ namespace AdventureGameDemo
                 }
             }
 
+
             PrintWorld();
 
             foreach (Item item in Items)
@@ -269,11 +274,18 @@ namespace AdventureGameDemo
                 }
             }
 
-            if (item is Potion && ((Potion)item).Name == "Health Potion")
+            if (KeyInfo.KeyChar >= '1' && KeyInfo.KeyChar <= '3')
             {
-                PlayerInventory.UseHealthPotion(Player, (Potion)item);
-            } 
+                int itemIndex = KeyInfo.KeyChar - '1';
 
+                if (itemIndex >= 0 && itemIndex < PlayerInventory.Items.Count)
+                {
+                    if (PlayerInventory.Items[itemIndex] is Potion && ((Potion)PlayerInventory.Items[itemIndex]).Name == "Health Potion")
+                    {
+                        PlayerInventory.UseItem(itemIndex, Player);
+                    }
+                }
+            }
         }
 
         public Varelse GetVarelseAtPosition(int x, int y)

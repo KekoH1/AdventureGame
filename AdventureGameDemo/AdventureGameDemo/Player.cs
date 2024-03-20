@@ -11,6 +11,7 @@ public class Player
     public int Endurance { get; set; }
     public object Inventory { get; internal set; }
     public int MaxHealth { get; internal set; }
+    public object Name { get; internal set; }
 
     public Player()
     {
