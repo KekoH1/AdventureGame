@@ -24,7 +24,7 @@ namespace AdventureGameDemo
         public List<Varelse> Varelser;
 
         public Potion item { get; private set; }
-        public Player Player;
+        public Player Player { get; private set; }
 
         public TheWorld()
         {
@@ -37,6 +37,7 @@ namespace AdventureGameDemo
             Items = new List<Item>();
             PlayerInventory = new Inventory();
             Varelser = new List<Varelse>();
+            Player = new Player();
 
             CreateWorld();
 
@@ -72,7 +73,7 @@ namespace AdventureGameDemo
 
             for (int i = 0; i < numberOfWeapons; i++)
             {
-                int randomX = random.Next(1, WorldSizeX -1 );
+                int randomX = random.Next(1, WorldSizeX - 1);
                 int randomY = random.Next(1, WorldSizeY - 1);
 
                 string weaponName = weaponNames[random.Next(weaponNames.Length)];
@@ -86,14 +87,14 @@ namespace AdventureGameDemo
             }
         }
 
-        public void GenerateRandomPotions(int numberOfPotions) 
+        public void GenerateRandomPotions(int numberOfPotions)
         {
             Random random = new Random();
             string[] potionsNames = { "Health Potion" };
 
-            for (int i = 0; i < numberOfPotions;i++)
+            for (int i = 0; i < numberOfPotions; i++)
             {
-                int randomX = random.Next(1, WorldSizeX - 1 );
+                int randomX = random.Next(1, WorldSizeX - 1);
                 int randomY = random.Next(1, WorldSizeY - 1);
 
                 string potionName = potionsNames[random.Next(potionsNames.Length)];
@@ -107,13 +108,13 @@ namespace AdventureGameDemo
                 }
                 else
                 {
-                    Potion newPotion = new(randomX, randomY, 'I', potionName, healingPower, 1);
+                    Potion newPotion = new Potion(randomX, randomY, 'I', potionName, healingPower, 1);
                     Items.Add(newPotion);
                     Grid[randomX, randomY] = newPotion.Symbol;
                 }
             }
         }
-        
+
 
         //Varelser
         public void GenerateRandomVarelsers(int numberOfVarelser)
@@ -273,13 +274,75 @@ namespace AdventureGameDemo
             }
         }
 
+      
+
         public void Combat(Player player, Varelse varelse)
         {
-            // Implement your combat logic here
             Console.WriteLine($"Player and {varelse.Name} are in combat!");
-            // Add your combat code here
+
+            while (player.Health > 0 && varelse.Health > 0)
+            {
+                Console.WriteLine("Choose an action:");
+                Console.WriteLine("1. Attack 1 (Strength: 10)");
+                Console.WriteLine("2. Attack 2 (Strength: 15)");
+                Console.WriteLine("3. Run away");
+
+                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+                Console.Clear();
+
+                switch (keyInfo.Key)
+                {
+                    case ConsoleKey.D1:
+                        Attack(player, varelse, 10);
+                        break;
+
+                    case ConsoleKey.D2:
+                        Attack(player, varelse, 15);
+                        break;
+
+                    case ConsoleKey.D3:
+                        Console.WriteLine("Player ran away from combat!");
+                        return;
+
+                    default:
+                        Console.WriteLine("Invalid action. Please choose a valid action.");
+                        break;
+                }
+
+                if (varelse.Health > 0)
+                {
+                    VarelseAttack(player, varelse, 10);
+                }
+            }
+
+            Console.WriteLine($"Player's Health: {player.Health}");
+            Console.WriteLine($"{varelse.Name}'s Health: {varelse.Health}");
+
+            if (player.Health <= 0)
+            {
+                Console.WriteLine("Player is defeated!");
+            }
+            else if (varelse.Health <= 0)
+            {
+                Console.WriteLine($"{varelse.Name} is defeated!");
+            }
         }
 
+        private void Attack(Player player, Varelse varelse, int strength)
+        {
+            int playerAttackDamage = player.Strength * strength;
+            varelse.Health -= playerAttackDamage;
+
+            Console.WriteLine($"Player deals {playerAttackDamage} damage to {varelse.Name}");
+        }
+
+        private void VarelseAttack(Player player, Varelse varelse, int strength)
+        {
+            int varelseAttackDamage = varelse.Strength * strength;
+            player.Health -= varelseAttackDamage;
+
+            Console.WriteLine($"{varelse.Name} deals {varelseAttackDamage} damage to Player");
+        }
         public Varelse GetVarelseAtPosition(int x, int y)
         {
             foreach (Varelse varelse in Varelser)
@@ -292,14 +355,9 @@ namespace AdventureGameDemo
             return null;
         }
 
-
-
-
         internal void PrintHealthBar()
         {
-            
+
         }
-
-
     }
 }
