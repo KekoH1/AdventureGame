@@ -28,8 +28,8 @@ namespace AdventureGameDemo
 
         public TheWorld()
         {
-            WorldSizeX = 10;
-            WorldSizeY = 10;
+            WorldSizeX = 20;
+            WorldSizeY = 50;
 
             Grid = new char[WorldSizeX, WorldSizeY];
             PlayerLocationX = 2;
@@ -195,6 +195,19 @@ namespace AdventureGameDemo
             }
 
             Console.ForegroundColor = ConsoleColor.Gray;
+
+            // Print Health Bar
+            int healthBarX = WorldSizeY + 2;
+            int healthBarY = itemsAndInventoryY + 2;
+
+            Console.SetCursorPosition(healthBarX, healthBarY++);
+            Console.WriteLine("Health Bar:");
+
+            Console.SetCursorPosition(healthBarX, healthBarY++);
+            Console.WriteLine($"Player's Health: {Player.Health}");
+
+            Console.SetCursorPosition(healthBarX, healthBarY++);
+            Console.WriteLine(new string('-', 20));
         }
 
 
@@ -274,7 +287,7 @@ namespace AdventureGameDemo
             }
         }
 
-      
+
 
         public void Combat(Player player, Varelse varelse)
         {
@@ -357,7 +370,7 @@ namespace AdventureGameDemo
 
         internal void PrintHealthBar()
         {
-
+            int PrintHealthBar = WorldSizeY + 2;
         }
     }
 }

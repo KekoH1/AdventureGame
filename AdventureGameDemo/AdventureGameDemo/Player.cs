@@ -17,7 +17,7 @@ public class Player
     public Player()
     {
         maxHealth = 100;
-        health = maxHealth;
+        Health = maxHealth;
         Stats = new Stats();
         Stats.Strength = 10;
         Stats.Endurance = 8;
@@ -49,42 +49,47 @@ public class Player
                 healthBar += "-";
             }
         }
+    
 
-        Console.WriteLine();
-        Console.WriteLine();
-        Console.WriteLine();
-        Console.WriteLine("Health: " + health + "/" + maxHealth);
-        /*Console.WriteLine("Health Bar: " + healthBar);*/
+
+/*Console.WriteLine();
+Console.WriteLine();
+Console.WriteLine();
+Console.WriteLine("Health: " + health + "/" + maxHealth);*/
+        
+
+
     }
+
 
     public bool IsAlive()
-    {
-        return health > 0;
-    }
+{
+    return health > 0;
+}
 
-    public int GetHealth()
-    {
-        return health;
-    }
+public int GetHealth()
+{
+    return health;
+}
 
-    public int GetMaxHealth()
-    {
-        return maxHealth;
-    }
+public int GetMaxHealth()
+{
+    return maxHealth;
+}
 
-    internal object GetStats()
-    {
-        throw new NotImplementedException();
-    }
+internal object GetStats()
+{
+    throw new NotImplementedException();
+}
 
-    internal void SetStats(Stats stats)
-    {
-        throw new NotImplementedException();
-    }
+internal void SetStats(Stats stats)
+{
+    throw new NotImplementedException();
+}
 
-    internal void Heal(int healthToRestore)
-    {
-        throw new NotImplementedException();
-    }
+internal void Heal(int healthToRestore)
+{
+    throw new NotImplementedException();
+}
 }
 
