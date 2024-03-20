@@ -11,7 +11,12 @@ public class Player
     public int Endurance { get; set; }
     public object Inventory { get; internal set; }
     public int MaxHealth { get; internal set; }
+
     public object Name { get; internal set; }
+
+    public int Strength { get; internal set; }
+    public object PlayerInventory { get; internal set; }
+
 
     public Player()
     {
@@ -52,7 +57,8 @@ public class Player
         Console.WriteLine();
         Console.WriteLine();
         Console.WriteLine();
-        Console.WriteLine("Health: " + healthBar);
+        Console.WriteLine("Health: " + health + "/" + maxHealth);
+        /*Console.WriteLine("Health Bar: " + healthBar);*/
     }
 
     public bool IsAlive()

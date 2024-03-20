@@ -13,7 +13,7 @@ namespace AdventureGameDemo
         public int Strength { get; set; }
         public int Endurance { get; set; }
         public int Agility { get; set; }
-
+        public int Health { get; internal set; }
 
         public Varelse(int x, int y, char symbol, string name, int strength, int endurance, int agility) : base(x, y, symbol)
         {
@@ -21,7 +21,9 @@ namespace AdventureGameDemo
             Strength = strength;
             Endurance = endurance;
             Agility = agility;
-        }
+            Health = 50;
+            
+            }
 
         public enum ErrorCode
         {
@@ -42,19 +44,19 @@ namespace AdventureGameDemo
                 return false;
             }
 
-            if (strength < 0)
+            if (strength < 1)
             {
                 errorCode = ErrorCode.InvalidStrength;
                 return false;
             }
 
-            if (endurance < 0)
+            if (endurance < 2)
             {
                 errorCode = ErrorCode.InvalidEndurance;
                 return false;
             }
 
-            if (agility < 0)
+            if (agility < 1)
             {
                 errorCode = ErrorCode.InvalidAgility;
                 return false;
@@ -90,6 +92,7 @@ namespace AdventureGameDemo
             public Varelse()
             {
                 Stats = new Stats();
+
             }
         }
 
