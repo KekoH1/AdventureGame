@@ -12,7 +12,7 @@ namespace AdventureGameDemo
         public int Y { get; set; }
         public char Symbol { get; set; }
         public object Stats { get; internal set; }
-        public object Name { get; internal set; }
+        /*public object Name { get; internal set; }*/
 
         public Entitet(int x, int y, char symbol)
         {

@@ -8,14 +8,18 @@ namespace AdventureGameDemo
 {
     public class Varelse : Entitet
     {
+        
         public string Name { get; set; }
         public int Strength { get; set; }
         public int Endurance { get; set; }
         public int Agility { get; set; }
-        public int Health { get; internal set; }
+        public int Health { get; set; }
 
         public Varelse(int x, int y, char symbol, string name, int strength, int endurance, int agility) : base(x, y, symbol)
         {
+            X = x;
+            Y = y;
+            Symbol = symbol;
             Name = name;
             Strength = strength;
             Endurance = endurance;
@@ -69,23 +73,23 @@ namespace AdventureGameDemo
             return Endurance > 0;
         }
 
-        internal void TakeDamage(int playerDamage)
+        public void TakeDamage(int playerDamage)
         {
             throw new NotImplementedException();
         }
 
-        internal int GetHealth()
+        public int GetHealth()
         {
             throw new NotImplementedException();
         }
     }
 
-    public class EmojiVarelse : Varelse
+    /*public class EmojiVarelse : Varelse
     {
         public EmojiVarelse(int x, int y, char symbol, string name, int strength, int endurance, int agility) : base(x, y, symbol, name, strength, endurance, agility)
         {
         }
-    }
+    }*/
 
    /* public class Program
     {

@@ -17,7 +17,7 @@ namespace AdventurGameDemo
             while (true)
             {
                 World.PrintWorld();
-                Player.PrintHealthBar(); // Uncomment this line to print the player's health bar
+               /* Player.PrintHealthBar();*/ // Uncomment this line to print the player's health bar
 
                 World.PlayerMovement();
             }

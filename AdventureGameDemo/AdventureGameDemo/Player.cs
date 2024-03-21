@@ -1,7 +1,7 @@
 using AdventureGameDemo;
 using System.Numerics;
 
-public class Player
+/*public class Player
 {
     private int health;
     private int maxHealth;
@@ -21,7 +21,7 @@ public class Player
     public Player()
     {
         maxHealth = 100;
-        Health = maxHealth;
+        health = maxHealth;
         Stats = new Stats();
         Stats.Strength = 10;
         Stats.Endurance = 8;
@@ -36,7 +36,7 @@ public class Player
             health = 0;
         }
     }
-<<<<<<< HEAD
+
     public void Bar(Player player)
     {
         Console.WriteLine("Player Health:");
@@ -44,7 +44,7 @@ public class Player
         if (player.MaxHealth != 0)
         {
             // Calculate the percentage of health remaining
-            double healthPercentage = (double)player.Health / player.MaxHealth;
+            double healthPercentage = (double)player.health / player.MaxHealth;
 
             // Handle the case where Player.Health is greater than Player.MaxHealth
             if (healthPercentage > 1)
@@ -74,44 +74,38 @@ public class Player
         }
 
     }
-}
+}*/
 public class Player
 {
     private int health;
     private int maxHealth;
 
-    public Player(int maxHealth)
-    {
-        this.maxHealth = maxHealth;
-        this.health = maxHealth;
-    }
+    public int Health { get; set; }
+    public Stats Stats { get; set; }
+    public int Endurance { get; set; }
+    public object Inventory { get; internal set; }
+    public int MaxHealth { get; internal set; }
+    public object Name { get; internal set; }
+    public int Strength { get; internal set; }
+    public object PlayerInventory { get; internal set; }
 
-    public int Health
+    public Player()
     {
-        get { return health; }
-        set { health = Math.Clamp(value, 0, maxHealth); }
+        maxHealth = 100;
+        health = maxHealth;
+        Stats = new Stats();
+        Stats.Strength = 10;
+        Stats.Endurance = 8;
+        Stats.Agility = 6;
     }
 
     public void TakeDamage(int damage)
     {
-        int previousHealth = Health;
-        Health -= damage;
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine($"Player took {damage} damage. Current health: {Health}");
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"Health bar: {new string('█', Health)}{new string(' ', maxHealth - Health)}");
-        Console.ResetColor();
-    }
-
-    public void Heal(int amount)
-    {
-        int previousHealth = Health;
-        Health += amount;
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"Player healed for {amount} health. Current health: {Health}");
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine($"Health bar: {new string('█', previousHealth)}{new string(' ', maxHealth - previousHealth)}");
-        Console.ResetColor();
+        health -= damage;
+        if (health < 0)
+        {
+            health = 0;
+        }
     }
 
     public void Bar()
@@ -151,9 +145,9 @@ public class Player
         }
     }
 }
-=======
 
-    public void PrintHealthBar()
+
+   /* public void PrintHealthBar()
     {
         int healthPercentage = (int)((float)health / maxHealth * 100);
         string healthBar = "";
@@ -170,7 +164,7 @@ public class Player
             }
         }
     
-
+*/
 
 /*Console.WriteLine();
 Console.WriteLine();
@@ -179,11 +173,11 @@ Console.WriteLine("Health: " + health + "/" + maxHealth);*/
         
 
 
-    }
+    
+/*
 
-
-    public bool IsAlive()
-{
+public bool IsAlive()
+    {
     return health > 0;
 }
 
@@ -214,3 +208,4 @@ internal void Heal(int healthToRestore)
 }
 
 >>>>>>> bd5f480b5b936cabaa5ede3f613123a5e505e644
+*/
