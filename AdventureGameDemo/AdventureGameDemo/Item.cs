@@ -7,14 +7,23 @@ using System.Threading.Tasks;
 
 namespace AdventureGameDemo
 {
-    public class Item : Entitet
+
+    public class Item 
     {
 
         public string Name { get; set; }
+        public char Symbol { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
 
-        public Item(int x, int y, char symbol, string name) : base(x, y, symbol)
+
+        public Item(int x, int y, char symbol, string name) 
         {
+            X = x;
+            Y = y;
+            Symbol = symbol;
             Name = name;
+            
         }
     }
 }

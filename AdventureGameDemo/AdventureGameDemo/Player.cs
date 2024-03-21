@@ -1,46 +1,42 @@
-using System;
+using AdventureGameDemo;
+using System.Numerics;
 
-namespace AdventureGameDemo
+public class Player
 {
-    public class Player
+    private int health;
+    private int maxHealth;
+
+    public int Health { get; set; }
+    public Stats Stats { get; set; }
+    public int Endurance { get; set; }
+    public object Inventory { get; internal set; }
+    public int MaxHealth { get; internal set; }
+
+    public object Name { get; internal set; }
+
+    public int Strength { get; internal set; }
+    public object PlayerInventory { get; internal set; }
+
+
+    public Player()
     {
-        private int health;
-        private int maxHealth;
+        maxHealth = 100;
+        Health = maxHealth;
+        Stats = new Stats();
+        Stats.Strength = 10;
+        Stats.Endurance = 8;
+        Stats.Agility = 6;
+    }
 
-        public Player(int maxHealth)
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health < 0)
         {
-            this.maxHealth = maxHealth;
-            this.health = maxHealth;
-        }
-
-        public int Health
-        {
-            get { return health; }
-            set { health = Math.Clamp(value, 0, maxHealth); }
-        }
-
-        public void TakeDamage(int damage)
-        {
-            int previousHealth = Health;
-            Health -= damage;
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"Player took {damage} damage. Current health: {Health}");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"Health bar: {new string('█', Health)}{new string(' ', maxHealth - Health)}");
-            Console.ResetColor();
-        }
-
-        public void Heal(int amount)
-        {
-            int previousHealth = Health;
-            Health += amount;
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"Player healed for {amount} health. Current health: {Health}");
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"Health bar: {new string('█', previousHealth)}{new string(' ', maxHealth - previousHealth)}");
-            Console.ResetColor();
+            health = 0;
         }
     }
+<<<<<<< HEAD
     public void Bar(Player player)
     {
         Console.WriteLine("Player Health:");
@@ -155,3 +151,66 @@ public class Player
         }
     }
 }
+=======
+
+    public void PrintHealthBar()
+    {
+        int healthPercentage = (int)((float)health / maxHealth * 100);
+        string healthBar = "";
+
+        for (int i = 0; i < 10; i++)
+        {
+            if (i < healthPercentage / 10)
+            {
+                healthBar += "#";
+            }
+            else
+            {
+                healthBar += "-";
+            }
+        }
+    
+
+
+/*Console.WriteLine();
+Console.WriteLine();
+Console.WriteLine();
+Console.WriteLine("Health: " + health + "/" + maxHealth);*/
+        
+
+
+    }
+
+
+    public bool IsAlive()
+{
+    return health > 0;
+}
+
+public int GetHealth()
+{
+    return health;
+}
+
+public int GetMaxHealth()
+{
+    return maxHealth;
+}
+
+internal object GetStats()
+{
+    throw new NotImplementedException();
+}
+
+internal void SetStats(Stats stats)
+{
+    throw new NotImplementedException();
+}
+
+internal void Heal(int healthToRestore)
+{
+    throw new NotImplementedException();
+}
+}
+
+>>>>>>> bd5f480b5b936cabaa5ede3f613123a5e505e644
