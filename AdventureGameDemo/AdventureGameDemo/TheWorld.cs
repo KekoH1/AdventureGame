@@ -253,6 +253,13 @@ namespace AdventureGameDemo
                 {
                     Combat(Player, varelseAtPlayerPosition);
                 }
+                if (Player.Health <= 0)
+                {
+                    Console.WriteLine("Player is defeated!");
+                    Console.WriteLine("GAME OVER!"); Console.WriteLine("Press any key to exit..."); 
+                    Console.ReadLine(); Environment.Exit(0); 
+                    
+                }   
             }
 
             for (int i = 0; i < Items.Count; i++)
@@ -299,6 +306,7 @@ namespace AdventureGameDemo
                 Console.WriteLine("1. Attack 1 (Strength: 10)");
                 Console.WriteLine("2. Attack 2 (Strength: 15)");
                 Console.WriteLine("3. Run away");
+                Console.WriteLine($"Player's Health: {player.Health}");
 
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
                 Console.Clear();
@@ -366,11 +374,14 @@ namespace AdventureGameDemo
                 }
             }
             return null;
-        }
+        } 
 
-        internal void PrintHealthBar()
-        {
-            int PrintHealthBar = WorldSizeY + 2;
-        }
+       
+        
+
+
+
+
+
     }
 }
