@@ -302,9 +302,10 @@ namespace AdventureGameDemo
 
             while (player.Health > 0 && varelse.Health > 0)
             {
+                Console.WriteLine($"{varelse.Name}'s Health: {varelse.Health}");
                 Console.WriteLine("Choose an action:");
-                Console.WriteLine("1. Attack 1 (Strength: 10)");
-                Console.WriteLine("2. Attack 2 (Strength: 15)");
+                Console.WriteLine("1. Attack With Fists");
+                Console.WriteLine("2. Attack With Weapon");
                 Console.WriteLine("3. Run away");
                 Console.WriteLine($"Player's Health: {player.Health}");
 
@@ -323,11 +324,12 @@ namespace AdventureGameDemo
 
                     case ConsoleKey.D3:
                         Console.WriteLine("Player ran away from combat!");
+                        MoveVarelse(varelse);
                         return;
 
                     default:
                         Console.WriteLine("Invalid action. Please choose a valid action.");
-                        break;
+                        continue;
                 }
 
                 if (varelse.Health > 0)
@@ -347,6 +349,23 @@ namespace AdventureGameDemo
             {
                 Console.WriteLine($"{varelse.Name} is defeated!");
             }
+        }
+
+        private void MoveVarelse(Varelse varelse)
+        {
+            Random random = new Random();
+            int randomX = varelse.X;
+            int randomY = varelse.Y;
+
+            while (randomX == varelse.X && randomY == varelse.Y)
+            {
+                randomX = random.Next(1, WorldSizeX - 1);
+                randomY = random.Next(1, WorldSizeY - 1);
+            }
+
+            varelse.X = randomX;
+            varelse.Y = randomY;
+            Grid[varelse.X, varelse.Y] = varelse.Symbol;
         }
 
         private void Attack(Player player, Varelse varelse, int strength)
