@@ -19,9 +19,9 @@ public class Player
         maxHealth = 100;
         Health = maxHealth;
         Stats = new Stats();
-        Stats.Strength = 10;
-        Stats.Endurance = 8;
-        Stats.Agility = 6;
+        Strength = 1;
+        Endurance = 8;
+       
     }
 
     public void TakeDamage(int damage)
