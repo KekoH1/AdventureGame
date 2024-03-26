@@ -22,6 +22,8 @@ namespace AdventureGameDemo
         public Inventory PlayerInventory;
 
         public List<Varelse> Varelser;
+        private int exitDoorX;
+        private int exitDoorY;
 
         public Potion item { get; private set; }
         public Player Player { get; private set; }
@@ -243,7 +245,7 @@ namespace AdventureGameDemo
 
                     Console.WriteLine("Choose an option:");
                     Console.WriteLine("1. Use Health Potion");
-                    Console.WriteLine("2. Use Another Item" );
+                    Console.WriteLine("2. Use Another Item");
 
                     ConsoleKeyInfo inputKey = Console.ReadKey(true);
                     if (inputKey.Key == ConsoleKey.D1)
@@ -253,7 +255,7 @@ namespace AdventureGameDemo
                         UseAnotherItem(Player);
                     }
                     break;
-                                                
+
             }
 
 
@@ -273,10 +275,10 @@ namespace AdventureGameDemo
                 if (Player.Health <= 0)
                 {
                     Console.WriteLine("Player is defeated!");
-                    Console.WriteLine("GAME OVER!"); Console.WriteLine("Press any key to exit..."); 
-                    Console.ReadLine(); Environment.Exit(0); 
-                    
-                }   
+                    Console.WriteLine("GAME OVER!"); Console.WriteLine("Press any key to exit...");
+                    Console.ReadLine(); Environment.Exit(0);
+
+                }
             }
 
             for (int i = 0; i < Items.Count; i++)
@@ -310,7 +312,7 @@ namespace AdventureGameDemo
         {
             foreach (Item item in PlayerInventory.Items)
             {
-                if(item is Weapon)
+                if (item is Weapon)
                 {
                     Weapon weapon = (Weapon)item;
                     Console.WriteLine($"You equipped {weapon.Name}.");
@@ -324,22 +326,22 @@ namespace AdventureGameDemo
 
         public void UseHealthPotion(Player player)
         {
-            
+
             foreach (Item item in PlayerInventory.Items)
             {
-                
-                if(item is Potion && ((Potion)item).Name == "Health Potion")
+
+                if (item is Potion && ((Potion)item).Name == "Health Potion")
                 {
                     Potion healthPotion = (Potion)item;
-                    
-                    if(player.Health > player.MaxHealth)
+
+                    if (player.Health > player.MaxHealth)
                     {
                         int healthToRestore = Math.Min(player.MaxHealth + player.Health, 20);
-                        
+
                         player.Health += healthToRestore;
                         Console.WriteLine($"Player used {healthPotion.Name} and restored {healthToRestore} health.");
                         Console.ReadLine();
-                        
+
                         PlayerInventory.Items.Remove(healthPotion);
                         Console.WriteLine("Tog bort health potion från inventory");
                         return;
@@ -378,7 +380,7 @@ namespace AdventureGameDemo
                         break;
 
                     case ConsoleKey.D2:
-                    
+
                         if (PlayerInventory.Items.Any(item => item is Weapon))
                         {
                             Attack(player, varelse, 25);
@@ -462,6 +464,42 @@ namespace AdventureGameDemo
                 }
             }
             return null;
-        } 
+        }
+
+
+
+
+
+        public bool IsExitDoorSpawned { get; private set; }
+
+        public void CheckWinCondition()
+        {
+            if (Varelser.Count == 0 && !IsExitDoorSpawned)
+            {
+                Random random = new Random();
+                int randomX = random.Next(1, WorldSizeX - 1);
+                int randomY = random.Next(1, WorldSizeY - 1);
+
+                Grid[randomX, randomY] = 'E';
+                IsExitDoorSpawned = true;
+            }
+
+            if (PlayerLocationX == exitDoorX && PlayerLocationY == exitDoorY)
+            {
+                Console.Clear();
+                Console.WriteLine("Congratulations! You have reached the exit door.");
+                Console.WriteLine("You win!");
+                Console.WriteLine("Press any key to exit...");
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
+        }
     }
+
+
+
+
+
+
 }
+

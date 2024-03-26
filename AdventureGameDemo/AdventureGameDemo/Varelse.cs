@@ -87,17 +87,5 @@ namespace AdventureGameDemo
         }
     }
 
-   /* public class Program
-    {
-        public static void Main(string[] args)
-        {
-            // Create 4 different varelser with emojis
-           *//* EmojiVarelse varelse1 = new EmojiVarelse(0, 0, '😈', "Varelse1", 10, 100, 5);
-            EmojiVarelse varelse2 = new EmojiVarelse(0, 0, '👹', "Varelse2", 15, 80, 8);
-            EmojiVarelse varelse3 = new EmojiVarelse(0, 0, '👻', "Varelse3", 8, 120, 6);
-            EmojiVarelse varelse4 = new EmojiVarelse(0, 0, '💀', "Varelse4", 12, 90, 7);*//*
-
-            // Use the varelser as needed
-        }
-    }*/
+   
 }

@@ -21,7 +21,7 @@ public class Player
         Stats = new Stats();
         Strength = 1;
         Endurance = 8;
-       
+
     }
 
     public void TakeDamage(int damage)
@@ -48,38 +48,23 @@ public class Player
             {
                 healthBar += "-";
             }
-        }      
+        }
     }
 
 
     public bool IsAlive()
-{
-    return health > 0;
-}
+    {
+        return health > 0;
+    }
 
-public int GetHealth()
-{
-    return health;
-}
+    public int GetHealth()
+    {
+        return health;
+    }
 
-public int GetMaxHealth()
-{
-    return maxHealth;
-}
+    public int GetMaxHealth()
+    {
+        return maxHealth;
+    }
 
-internal object GetStats()
-{
-    throw new NotImplementedException();
 }
-
-internal void SetStats(Stats stats)
-{
-    throw new NotImplementedException();
-}
-
-internal void Heal(int healthToRestore)
-{
-    throw new NotImplementedException();
-}
-}
-
