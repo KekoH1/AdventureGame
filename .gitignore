@@ -396,3 +396,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/AdventureGameDemo/AdventureGameDemo/obj/Debug/net8.0/AdventureGameDemo.GeneratedMSBuildEditorConfig.editorconfig
+/AdventureGameDemo/AdventureGameDemo/obj/Debug/net8.0/AdventureGameDemo.AssemblyInfoInputs.cache
+/AdventureGameDemo/AdventureGameDemo/obj/Debug/net8.0/AdventureGameDemo.AssemblyInfo.cs

@@ -186,12 +186,12 @@ namespace AdventureGameDemo
             Console.WriteLine(new string('-', 20));
 
             Console.SetCursorPosition(itemsAndInventoryX, itemsAndInventoryY++);
-            Console.WriteLine("Inventory: ");
+            Console.WriteLine("Press 'B' or 'I' to open Inventory: ");
 
             for (int i = 0; i < PlayerInventory.Items.Count; i++)
             {
                 Console.SetCursorPosition(itemsAndInventoryX, itemsAndInventoryY++);
-                Console.WriteLine($"{i + 1}. {PlayerInventory.Items[i].Name}");
+                Console.WriteLine($"{PlayerInventory.Items[i].Name}");
             }
 
             Console.ForegroundColor = ConsoleColor.Gray;
@@ -237,6 +237,23 @@ namespace AdventureGameDemo
                 case ConsoleKey.DownArrow:
                     newPlayerLocationX++;
                     break;
+                case ConsoleKey.I:
+                case ConsoleKey.B:
+                    PlayerInventory.PrintInventory();
+
+                    Console.WriteLine("Choose an option:");
+                    Console.WriteLine("1. Use Health Potion");
+                    Console.WriteLine("2. Use Another Item" );
+
+                    ConsoleKeyInfo inputKey = Console.ReadKey(true);
+                    if (inputKey.Key == ConsoleKey.D1)
+                    { UseHealthPotion(Player); }
+                    else if (inputKey.Key == ConsoleKey.D2)
+                    {
+                        UseAnotherItem(Player);
+                    }
+                    break;
+                                                
             }
 
 
@@ -287,14 +304,50 @@ namespace AdventureGameDemo
                     break;
                 }
             }
-
-            if (item is Potion && ((Potion)item).Name == "Health Potion")
-            {
-                PlayerInventory.UseHealthPotion(Player, (Potion)item);
-            }
         }
 
+        public void UseAnotherItem(Player player)
+        {
+            foreach (Item item in PlayerInventory.Items)
+            {
+                if(item is Weapon)
+                {
+                    Weapon weapon = (Weapon)item;
+                    Console.WriteLine($"You equipped {weapon.Name}.");
+                    Console.ReadLine();
+                    return;
+                }
+            }
+            Console.WriteLine("You dont have any weapons in your inventory.");
+            Console.ReadLine();
+        }
 
+        public void UseHealthPotion(Player player)
+        {
+            foreach (Item item in PlayerInventory.Items)
+            {
+                if(item is Potion && ((Potion)item).Name == "Health Potion")
+                {
+                    Potion healthPotion = (Potion)item;
+                    if(player.Health < player.MaxHealth)
+                    {
+                        int healthToRestore = Math.Min(player.MaxHealth - player.Health, 20);
+                        player.Health += healthToRestore;
+                        Console.WriteLine($"Player used {healthPotion.Name} and restored {healthToRestore} health.");
+                        Console.ReadLine();
+                        PlayerInventory.Items.Remove(healthPotion);
+                        return;
+                    }
+                    else
+                    {
+                        Console.WriteLine("You are already at full health.");
+                        Console.ReadLine();
+                        return;
+                    }
+                }
+            }
+            Console.WriteLine("You dont have any Health Potion in your inventory.");
+        }
 
         public void Combat(Player player, Varelse varelse)
         {
@@ -394,13 +447,5 @@ namespace AdventureGameDemo
             }
             return null;
         } 
-
-       
-        
-
-
-
-
-
     }
 }

@@ -11,7 +11,7 @@ namespace AdventurGameDemo
             Player Player = new Player();
 
             World.GenerateRandomWeapons(2);
-            World.GenerateRandomPotions(3);
+            World.GenerateRandomPotions(5);
             World.GenerateRandomVarelsers(3);
 
             while (true)
