@@ -324,18 +324,24 @@ namespace AdventureGameDemo
 
         public void UseHealthPotion(Player player)
         {
+            
             foreach (Item item in PlayerInventory.Items)
             {
+                
                 if(item is Potion && ((Potion)item).Name == "Health Potion")
                 {
                     Potion healthPotion = (Potion)item;
-                    if(player.Health < player.MaxHealth)
+                    
+                    if(player.Health > player.MaxHealth)
                     {
-                        int healthToRestore = Math.Min(player.MaxHealth - player.Health, 20);
+                        int healthToRestore = Math.Min(player.MaxHealth + player.Health, 20);
+                        
                         player.Health += healthToRestore;
                         Console.WriteLine($"Player used {healthPotion.Name} and restored {healthToRestore} health.");
                         Console.ReadLine();
+                        
                         PlayerInventory.Items.Remove(healthPotion);
+                        Console.WriteLine("Tog bort health potion från inventory");
                         return;
                     }
                     else
