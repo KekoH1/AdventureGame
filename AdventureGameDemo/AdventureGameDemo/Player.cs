@@ -48,17 +48,7 @@ public class Player
             {
                 healthBar += "-";
             }
-        }
-    
-
-
-/*Console.WriteLine();
-Console.WriteLine();
-Console.WriteLine();
-Console.WriteLine("Health: " + health + "/" + maxHealth);*/
-        
-
-
+        }      
     }
 
 
