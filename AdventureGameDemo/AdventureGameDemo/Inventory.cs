@@ -22,7 +22,7 @@ namespace AdventureGameDemo
             items.Add(item);
         }
 
-        public void UseItem(int itemIndex, Player player)
+        /*public void UseItem(int itemIndex, Player player)
         {
             if (itemIndex >= 0 && itemIndex < items.Count){
                 Item item = items[itemIndex];
@@ -40,7 +40,7 @@ namespace AdventureGameDemo
                 }
             }
             else { Console.WriteLine("Invalid item index."); }
-        }
+        }*/
 
         /*public void UseHealthPotion(Player player, Potion healthPotion)
         {
