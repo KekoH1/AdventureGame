@@ -372,8 +372,18 @@ namespace AdventureGameDemo
                         break;
 
                     case ConsoleKey.D2:
-                        Attack(player, varelse, 15);
+                    
+                        if (PlayerInventory.Items.Any(item => item is Weapon))
+                        {
+                            Attack(player, varelse, 25);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid action. Please choose a valid action.");
+                            continue;
+                        }
                         break;
+
 
                     case ConsoleKey.D3:
                         Console.WriteLine("Player ran away from combat!");
