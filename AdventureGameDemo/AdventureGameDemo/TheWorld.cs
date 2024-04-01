@@ -299,7 +299,7 @@ namespace AdventureGameDemo
             {
                 if (PlayerLocationX == item.X && PlayerLocationY == item.Y)
                 {
-                    /*Console.WriteLine($"Player picked up {item.Name}");*/ // skapa en inventory klass som skriver ut vilka items man har
+                    
                     Items.Remove(item);
                     break;
                 }

@@ -6,8 +6,7 @@ namespace AdventurGameDemo
     {
         public static void Main(string[] args)
         {
-            TheWorld World = new TheWorld();
-            /*Player Player = new Player(100);*/
+            TheWorld World = new TheWorld();           
             Player Player = new Player();
 
             World.GenerateRandomWeapons(2);
@@ -17,7 +16,7 @@ namespace AdventurGameDemo
             while (true)
             {
                 World.PrintWorld();
-                Player.PrintHealthBar(); // Uncomment this line to print the player's health bar
+                Player.PrintHealthBar(); 
 
                 World.PlayerMovement();
             }
